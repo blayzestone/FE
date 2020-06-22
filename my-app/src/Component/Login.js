@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { props } from "bluebird";
 
 export const Login = () => {
   const [credentials, setCredentials] = useState({
