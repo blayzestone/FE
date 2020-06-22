@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 export const Login = () => {
-  state = {
-    credential: {
-      name: "",
-      password: ""
-    },
-    isLoading: false
-  };
+  //   state = {
+  //     credential: {
+  //       name: "",
+  //       password: ""
+  //     },
+  //     isLoading: false
+  //   };
   const handleChange = e => {
     //useEffect({
     axiosWithAuth()

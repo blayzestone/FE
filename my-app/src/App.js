@@ -1,9 +1,22 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { Provider } from "react";
 import "./App.css";
 
-function App() {
-  return <div className="App"></div>;
-}
+import { Login } from "./Component/Login";
+
+import { axiosWithAuth } from "./utils/axiosWithAuth";
+import { Context } from "./context.js/Context";
+
+const App = () => {
+  const [listings] = useState(axiosWithAuth);
+  return (
+    <div className="App">
+      <Context.Provider value={listings}>
+        <Route exact path="/">
+          <Login />
+        </Route>
+      </Context.Provider>
+    </div>
+  );
+};
 
 export default App;
