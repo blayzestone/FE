@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { props } from "bluebird";
 
 export const Login = () => {
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: ""
+  });
   //   state = {
   //     credential: {
   //       name: "",
@@ -10,23 +15,23 @@ export const Login = () => {
   //     isLoading: false
   //   };
   const handleChange = e => {
-    //useEffect({
-    axiosWithAuth()
-      .post("", this.state.credentials)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    //}, [])
-
     e.preventDefault();
-    setLogin({
-      ...Login,
+    setCredentials({
+      ...credentials,
       [e.target.name]: e.target.value
     });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    setLogin();
+    axiosWithAuth()
+      .post("", this.state.credentials)
+      .then(res => {
+        //console.log(res)
+        localStorage.setItem("token" /*res.data.payload*/);
+        //props.history.push();
+      })
+      .catch(err => console.log(err));
   };
 
   return (
@@ -34,11 +39,22 @@ export const Login = () => {
       <h2>Login Page</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          <input name="name" type="text" onChange={handleChange} value={} />
+          <input
+            name="name"
+            type="text"
+            onChange={handleChange}
+            value={credentials.name}
+          />
         </label>
         <label>
-          <input name="password" type="text" onChange={handleChange} value={} />
+          <input
+            name="password"
+            type="text"
+            onChange={handleChange}
+            value={credentials.password}
+          />
         </label>
+        <button>Submit</button>
       </form>
     </>
   );
